@@ -6,12 +6,13 @@
 #include "Outlet.hpp"
 
 
-bool DevID::match(std::string& mac)
+
+bool DevID::match(std::string& mac) const
 {
 	return (m_mac == mac);
 }
 
-bool DevID::match(unsigned int ssid)
+bool DevID::match(unsigned int ssid) const
 {
 	for (const auto &itt : m_ssidList)
 	{
@@ -32,12 +33,12 @@ bool DevID::match(unsigned int ssid)
  *
  *
 */
-Device::Device(DevAttr* devAttr, std::string mac):m_devAttr(devAttr)
+Device::Device(std::string mac, const DevAttr* devAttr):m_devAttr(devAttr)
 {
 	std::vector<SsidPair> result;
 	for(int ii = 0; ;ii++)
 	{
-		OutletAttr* outlet = m_devAttr->getOutlet(ii);
+		auto outlet = m_devAttr->getOutlet(ii);
 		if (outlet == nullptr)
 		{
 			break;
@@ -89,13 +90,13 @@ bool Device::recvFrom(std::string& msg, void *miGateway)
 
 
 
-bool Device::match(std::string& mac)
+bool Device::match(std::string& mac) const
 {
 	return m_devID.match(mac);
 }
 
 
-bool Device::match(unsigned int ssid, int type, int subType, int unit)
+bool Device::match(unsigned int ssid, int type, int subType, int unit) const
 {
 	return (m_devID.match(ssid) && m_devAttr->match(type, subType, unit));
 }

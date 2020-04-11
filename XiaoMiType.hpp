@@ -1,4 +1,11 @@
 #pragma once
+#include <iostream>
+#include <vector>
+#include <string>
+#include <boost/tuple/tuple.hpp>
+#include <initializer_list>
+#include <list>
+
 
 
 typedef std::pair<unsigned int, std::string>   SsidPair;

@@ -17,7 +17,7 @@ public:
 	std::string zigbeeModel;
 	std::string model;
 	std::string vendor;
-	std::list<OutletAttr*> outlet;
+	std::list<const OutletAttr*> outlet;
 };
 
 
@@ -31,21 +31,22 @@ public:
 
 	}
 
-	DevAttr(DevAttr* dattr);
-	DevAttr(DevInfo& devInfo);
+	DevAttr(const DevAttr* dattr);
+	DevAttr(const DevInfo& devInfo);
 	
 	
 	DevAttr(std::initializer_list<OutletAttr*> list, std::string name, std::string zigbeeModel, std::string model, std::string vendor);
 
-	friend  std::ostream & operator << (std::ostream& out, DevAttr& da);
+	friend std::ostream & operator << (std::ostream& out, DevAttr& devAttr);
+	friend std::ostream & operator << (std::ostream& out, DevAttr const & devAttr);
 
 
 public:
-	std::string getName(){return m_name;}
-	std::string getZigbeeModel(){return m_zigbeeModel;}
-	std::string getModel(){return m_model;}
-	std::string getVendor(){return m_model;}
-	OutletAttr* getOutlet(int Outlet)
+	std::string getName() const {return m_name;}
+	std::string getZigbeeModel() const {return m_zigbeeModel;}
+	std::string getModel() const {return m_model;}
+	std::string getVendor() const {return m_model;}
+	const OutletAttr* getOutlet(int Outlet) const
 	{
 		if (Outlet >= m_Outlet.size())
 		{
@@ -53,19 +54,19 @@ public:
 		}
 		return m_Outlet.at(Outlet);
 	}
-	std::vector<OutletAttr*>& getOutlet()
+	const std::vector<const OutletAttr*>& getOutlet() const
 	{
 		return m_Outlet;
 	}
 
-	bool match(int type, int subType, int unit);
+	bool match(int type, int subType, int unit) const;
 
 private:
 	std::string m_name;
 	std::string m_zigbeeModel;
 	std::string m_model;
 	std::string m_vendor;
-	std::vector<OutletAttr*> m_Outlet; 
+	std::vector<const OutletAttr*> m_Outlet; 
 };
 
 

@@ -2,29 +2,9 @@
 #include <string>
 #include "DevAttr.hpp"
 
-std::ostream & operator << (std::ostream& out, DevAttr& da)
-{
-	out<<std::endl;
-	out<<"---------devattr----------------"<<std::endl;
-	out<<"name:"<<da.m_name<<std::endl;
-	out<<"zigbeeModel:"<<da.m_zigbeeModel<<std::endl;
-	out<<"model:"<<da.m_model<<std::endl;
-	out<<"vendor:"<<da.m_vendor<<std::endl;
-	out<<"outlet number:"<<da.m_Outlet.size()<<std::endl;
-	out<<std::endl;
-	int ii = 0;
-	for (const auto &itt : da.m_Outlet)
-	{
-		out<<"---------outlet:"<<ii++<<"--------"<<std::endl;
-		out<<itt;
-		out<<std::endl;
-	}
-	out<<std::endl;
-	return out;
-}
 
 
-DevAttr::DevAttr(DevAttr* dattr)
+DevAttr::DevAttr(const DevAttr* dattr)
 {
 	if (dattr != nullptr)
 	{
@@ -35,7 +15,7 @@ DevAttr::DevAttr(DevAttr* dattr)
 	}
 }
 
-DevAttr::DevAttr(DevInfo& devInfo)
+DevAttr::DevAttr(const DevInfo& devInfo)
 {
 	m_name =devInfo.name;
 	m_zigbeeModel = devInfo.zigbeeModel;
@@ -69,7 +49,7 @@ DevAttr::DevAttr(std::initializer_list<OutletAttr*> list, std::string name, std:
 }
 
 
-bool DevAttr::match(int type, int subType, int unit)
+bool DevAttr::match(int type, int subType, int unit) const
 {
 	for(const auto &itt : m_Outlet)
 	{

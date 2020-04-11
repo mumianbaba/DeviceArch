@@ -2,36 +2,6 @@
 #include <iostream>
 #include <string>
 
-inline std::ostream & operator << (std::ostream& out, OutletAttr& oa)
-{
-	out<<"type:"<<oa.m_type<<std::endl;
-	out<<"subType:"<<oa.m_subType<<std::endl;
-	out<<"swType:"<<oa.m_swType<<std::endl;
-	out<<"unit:"<<oa.m_unit<<std::endl;
-	out<<"direction:"<<oa.m_direction<<std::endl;
-	out<<"opts:"<<oa.m_opts<<std::endl;
-	return out;
-}
-
-
-
-std::ostream & operator << (std::ostream& out, OutletAttr* poa)
-{
-	if (poa == nullptr)
-	{
-		out<<"ptr null"<<std::endl;
-		return out;
-	}
-	out<<"type:"<<poa->m_type<<std::endl;
-	out<<"subType:"<<poa->m_subType<<std::endl;
-	out<<"swType:"<<poa->m_swType<<std::endl;
-	out<<"unit:"<<poa->m_unit<<std::endl;
-	out<<"direction:"<<poa->m_direction<<std::endl;
-	out<<"opts:"<<poa->m_opts<<std::endl;
-	return out;
-}
-
-
 
 
 OutletAttr::OutletAttr(int type, int subType, int swType, int unit, int direction, std::string opts)
@@ -41,14 +11,14 @@ OutletAttr::OutletAttr(int type, int subType, int swType, int unit, int directio
 }
 
 
-inline unsigned int OutletAttr::macToUint(std::string& mac)
+inline unsigned int OutletAttr::macToUint(std::string& mac) const
 {
-	unsigned long long sID = std::stoull(mac, NULL, 16);
+	unsigned long long sID = std::stoull(mac, 0, 16);
 	return (sID & 0xffffffff);
 }
 
 
-SsidPair OutletAttr::idConverter(std::string& mac)
+SsidPair OutletAttr::idConverter(std::string& mac) const
 {
 	
 	unsigned int rowId;
@@ -60,7 +30,7 @@ SsidPair OutletAttr::idConverter(std::string& mac)
 	return std::make_pair(rowId, strSsid);
 }
 
-bool OutletAttr::match(int type, int subType, int unit)
+bool OutletAttr::match(int type, int subType, int unit) const
 {
 	if (type == m_type && subType == m_subType && unit == m_unit)
 	{
@@ -84,12 +54,12 @@ OnOffOutlet::OnOffOutlet(int unit, int dir, std::initializer_list<Rule_OnOff> li
 }
 
 
-bool OnOffOutlet::recvFrom(std::string& root, void * miGateway)
+bool OnOffOutlet::recvFrom(std::string& root, void * miGateway) const
 {
 	std::cout<<"OnOffOutlet recvFrom"<<std::endl;
 }
 
-bool OnOffOutlet::writeTo(const unsigned char* packet, int len, std::string& mac, std::string& model,std::string& gwMac,  std::string& key, void * miGateway)
+bool OnOffOutlet::writeTo(const unsigned char* packet, int len, std::string& mac, std::string& model,std::string& gwMac,  std::string& key, void * miGateway) const
 {
 	std::cout<<"OnOffOutlet writeTo"<<std::endl;
 }

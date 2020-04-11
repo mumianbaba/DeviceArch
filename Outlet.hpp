@@ -17,13 +17,13 @@ public:
 	OutletAttr(int type, int subType, int swType, int unit, int direction, std::string opts);
 	~OutletAttr(){}	
 
-	friend std::ostream & operator << (std::ostream& out, OutletAttr& oa);
-	friend std::ostream & operator << (std::ostream& out, OutletAttr* poa);
+	friend std::ostream & operator << (std::ostream& out, OutletAttr& outletAttr);
+	friend std::ostream & operator << (std::ostream& out, OutletAttr* outletAttr);
 
 public:
-	virtual bool recvFrom(std::string& root, void * miGateway) = 0;
-	virtual bool writeTo(const unsigned char* packet, int len, std::string& mac, std::string& model, std::string& gwMac, std::string& key, void * miGateway) = 0;
-	virtual SsidPair idConverter(std::string& mac);
+	virtual bool recvFrom(std::string& root, void * miGateway) const = 0;
+	virtual bool writeTo(const unsigned char* packet, int len, std::string& mac, std::string& model, std::string& gwMac, std::string& key, void * miGateway) const = 0;
+	virtual SsidPair idConverter(std::string& mac) const;
 
 public:
 	int getType(){return m_type;}
@@ -38,9 +38,9 @@ public:
 
 	std::string getOpts(){return m_opts;}
 
-	unsigned int macToUint(std::string& mac);	
+	unsigned int macToUint(std::string& mac) const;	
 
-	bool match(int type, int subType, int unit);
+	bool match(int type, int subType, int unit) const;
 
 protected:
 
@@ -63,9 +63,9 @@ public:
 	OnOffOutlet(int unit, int dir, std::initializer_list<Rule_OnOff> list);
 
 public:
-	bool recvFrom(std::string& root, void * miGateway) override;
+	bool recvFrom(std::string& root, void * miGateway)  const override;
 
-	bool writeTo(const unsigned char* packet, int len, std::string& mac, std::string& model, std::string& gwMac, std::string& key, void * miGateway)  override;
+	bool writeTo(const unsigned char* packet, int len, std::string& mac, std::string& model, std::string& gwMac, std::string& key, void * miGateway) const override;
 
 
 private:
