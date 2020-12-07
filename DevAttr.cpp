@@ -3,6 +3,7 @@
 #include "DevAttr.hpp"
 
 
+using namespace XiaoMi;
 
 DevAttr::DevAttr(const DevAttr* dattr)
 {

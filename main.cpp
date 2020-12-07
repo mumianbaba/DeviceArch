@@ -6,13 +6,7 @@
 #include "XiaomiGateway.hpp"
 
 
-
-
-
-
-
-
-
+using namespace XiaoMi;
 
 int main(int argc, char** argv)
 {
@@ -22,14 +16,16 @@ int main(int argc, char** argv)
 
 	std::string zigbeeModel = "lumi.ctrl_neutral2";
 	std::string mac = "1234567890123456";
-	/* formDevice */
+	/* add device on device list */
 	{
 		Device* pdev = new Device(mac, gw->findDevAttr(zigbeeModel));
 		std::shared_ptr<Device> dev (pdev);
 		gw->addDeviceToMap(mac, dev);
+		gw->addDeviceToMap(mac, dev);
+		gw->addDeviceToMap(mac, dev);
 	}
 
-	/* toDevice */
+	/* from/to Device */
 	{
 		std::shared_ptr<Device> dev1 = gw->getDevice(mac);
 		std::shared_ptr<Device> dev2 = gw->getDevice(0x90123456, pTypeGeneralSwitch, sSwitchGeneralSwitch, 1);
@@ -51,19 +47,15 @@ int main(int argc, char** argv)
 		std::cout<<dev4.get()<<std::endl;
 	}
 
+	/* remove device from device list */
+	{
+		gw->delDeviceFromMap(mac);
+		gw->delDeviceFromMap(mac);
+		gw->delDeviceFromMap(mac);
+	}
+
+	gw->getDevice(mac);
 	delete gw;
-#if 0	
-
-	AttrMap* aMap = createDeviceInfoMap(devInfoTab, 2);
-	std::shared_ptr<AttrMap> sAMap(aMap);
-
-	Device* dev =  new Device(aMap->at("lumi.ctrl_neutral2"), "1234567890123456");
-
-	std::cout<<*dev<<std::endl;
-
-
-
-#endif
 	return 0;
 }
 

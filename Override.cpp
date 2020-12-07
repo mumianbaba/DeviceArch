@@ -4,6 +4,7 @@
 #include "DevAttr.hpp"
 #include "Device.hpp"
 
+namespace XiaoMi{
 
 /* OutletAttr */
 std::ostream & operator << (std::ostream& out, OutletAttr& outletAttr)
@@ -99,5 +100,5 @@ std::ostream & operator << (std::ostream& out, Device& device)
 	out<<*(device.m_devAttr)<<std::endl;
 }
 
-
+}
 

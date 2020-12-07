@@ -7,6 +7,7 @@
 #include "DevAttr.hpp"
 #include "Device.hpp"
 
+namespace XiaoMi{
 
 
 static const OnOffOutlet onoff0{ 1, 3, {{"channel_0", "on", true}, {"channel_0", "off", false}}};
@@ -31,4 +32,6 @@ static const DevInfo  devInfoTab[] {
 		outlet : {&onoff0}
 	}
 };
+
+}
 

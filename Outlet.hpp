@@ -9,6 +9,7 @@
 
 #include "XiaoMiType.hpp"
 
+namespace XiaoMi{
 
 
 class OutletAttr
@@ -26,17 +27,17 @@ public:
 	virtual SsidPair idConverter(std::string& mac) const;
 
 public:
-	int getType(){return m_type;}
+	int getType() const {return m_type;}
 
-	int getSubType(){return m_subType;}
+	int getSubType() const {return m_subType;}
 
-	int getswType(){return m_swType;}
+	int getswType() const {return m_swType;}
 
-	int getUnit(){return m_unit;}
+	int getUnit() const {return m_unit;}
 
-	int getDirection(){return m_direction;}
+	int getDirection() const {return m_direction;}
 
-	std::string getOpts(){return m_opts;}
+	std::string getOpts() const {return m_opts;}
 
 	unsigned int macToUint(std::string& mac) const;	
 
@@ -74,7 +75,7 @@ private:
 
 };
 
-
+}
 
 
 

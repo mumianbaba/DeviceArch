@@ -3,6 +3,7 @@
 #include <string>
 
 
+using namespace XiaoMi;
 
 OutletAttr::OutletAttr(int type, int subType, int swType, int unit, int direction, std::string opts)
 :m_type(type), m_subType(subType),m_swType(swType),m_unit(unit),m_direction(direction),m_opts(opts)

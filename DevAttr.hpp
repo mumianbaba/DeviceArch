@@ -10,6 +10,8 @@
 #include "Outlet.hpp"
 
 
+namespace XiaoMi{
+
 struct DevInfo{
 
 public:
@@ -45,7 +47,7 @@ public:
 	std::string getName() const {return m_name;}
 	std::string getZigbeeModel() const {return m_zigbeeModel;}
 	std::string getModel() const {return m_model;}
-	std::string getVendor() const {return m_model;}
+	std::string getVendor() const {return m_vendor;}
 	const OutletAttr* getOutlet(int Outlet) const
 	{
 		if (Outlet >= m_Outlet.size())
@@ -70,6 +72,5 @@ private:
 };
 
 
-
-
+}
 

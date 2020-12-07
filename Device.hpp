@@ -13,6 +13,7 @@
 #include "DevAttr.hpp"
 #include "Outlet.hpp"
 
+namespace XiaoMi{
 
 
 
@@ -32,8 +33,8 @@ public:
 
 	friend std::ostream & operator << (std::ostream& out, DevID& devID);
 
-	std::string getMac(){return m_mac;}
-	const std::vector<SsidPair>& getSsid(){return m_ssidList;}
+	std::string getMac() const {return m_mac;}
+	const std::vector<SsidPair>& getSsid() const {return m_ssidList;}
 	bool match(std::string& mac) const;	
 	bool match(unsigned int ssid) const;
 
@@ -58,6 +59,35 @@ class Device
 		friend std::ostream & operator << (std::ostream& out, Device& device);
 		bool match(std::string& mac) const;
 		bool match(unsigned int ssid, int type, int subType, int unit) const;
+
+		std::string getMac()   const 
+		{
+			return m_devID.getMac();
+		}
+		const std::vector<SsidPair>& getSsid() const
+		{
+			return m_devID.getSsid();
+		}
+		std::string getName() const
+		{
+			return m_devAttr->getName();
+		}
+		std::string getZigbeeModel() const
+		{
+			return m_devAttr->getZigbeeModel();
+		}
+		std::string getModel() const
+		{
+			return m_devAttr->getModel();
+		}
+		std::string getVendor() const
+		{
+			return m_devAttr->getVendor();
+		}
+		const std::vector<const OutletAttr*>& getOutlet() const
+		{
+			return m_devAttr->getOutlet();
+		}
 	private:
 	
 		const DevAttr* m_devAttr;
@@ -65,6 +95,8 @@ class Device
 
 };
 
+
+}
 
 
 

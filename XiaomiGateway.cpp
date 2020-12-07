@@ -7,9 +7,12 @@
 #include "XiaomiGateway.hpp"
 #include "SupportDevice.hpp"
 
+using namespace XiaoMi;
 
 AttrMap XiaomiGateway::m_attrMap;
 DeviceMap XiaomiGateway::m_deviceMap;
+
+
 
 XiaomiGateway::XiaomiGateway()
 {
@@ -57,6 +60,12 @@ void XiaomiGateway::addDeviceToMap(std::string& mac, std::shared_ptr<Device> ptr
 {
 	m_deviceMap.emplace(mac, ptr);
 	std::cout<<"add device to map mac:"<<mac<<std::endl;
+}
+
+void XiaomiGateway::delDeviceFromMap(std::string& mac)
+{
+	m_deviceMap.erase(mac);
+	std::cout<<"delDeviceFromMap mac:"<<mac<<std::endl;
 }
 
 

@@ -5,6 +5,7 @@
 #include "DevAttr.hpp"
 #include "Outlet.hpp"
 
+using namespace XiaoMi;
 
 
 bool DevID::match(std::string& mac) const
